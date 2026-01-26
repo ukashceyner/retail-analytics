@@ -1,0 +1,27 @@
+# ABOUTME: Project configuration for retail analytics dashboard.
+# ABOUTME: Includes pytest settings and project metadata.
+
+[project]
+name = "retail-analytics"
+version = "0.1.0"
+description = "Production-ready analytics dashboard for retail orders data"
+requires-python = ">=3.9"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["sql", "utils"]
+omit = ["tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+]

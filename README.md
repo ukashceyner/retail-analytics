@@ -4,11 +4,11 @@
 
 ## What this is
 
-An analytics dashboard for retail order data. Takes a CSV, cleans it, loads it into Postgres, and serves it up through an interactive Streamlit app. Nothing fancy, just a solid end-to-end data project.
+An analytics dashboard for retail order data. Takes a CSV, cleans it, loads it into Postgres, and serves it up through an interactive Streamlit app. 
 
 ## What it does
 
-- Shows revenue, profit, and order volume at a glance
+- Shows revenue, profit, and order volume
 - Breaks down performance by product category
 - Compares regions against each other
 - Tracks monthly trends and year-over-year changes
@@ -52,7 +52,7 @@ retail-analytics/
 └── tests/
 ```
 
-## SQL stuff
+## SQL
 
 The queries in `sql/queries/` use window functions (RANK, LAG), CTEs, and CASE expressions. Here's the YoY growth query:
 

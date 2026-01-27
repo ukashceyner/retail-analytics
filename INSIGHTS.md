@@ -1,6 +1,6 @@
 # Business Insights
 
-Looking at roughly 10,000 retail orders from 2022-2023.
+Looking at 10,000 retail orders from 2022-2023.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Technology products make more money per transaction than other categories. The W
 
 Technology generates outsized revenue relative to how many orders it accounts for. The average Technology order is worth more than orders in other categories. Makes sense - people buying tech are already prepared to spend.
 
-If I were running marketing here, I'd lean harder into Technology. Cross-sell accessories. Bundle deals. That's where the money is.
+If I were running marketing here, I'd lean harder into Technology. Cross-sell accessories, bundle deals. That's where the money is.
 
 ## Regional differences
 
@@ -28,7 +28,7 @@ This is a common trap. Heavy discounting trains customers to wait for sales. It 
 
 Standard shipping is about 60% of orders. Premium options see higher cart abandonment.
 
-People are weirdly price-sensitive about shipping even when they're buying expensive stuff. A $5 shipping fee on a $200 order feels worse than it should. Consider free standard shipping and price premium options to cover costs rather than maximize margin.
+People are price sensitive about shipping even when they're buying expensive stuff. A $5 shipping fee on a $200 order feels worse than it should. Consider free standard shipping and price premium options to cover costs rather than maximize margin.
 
 ## Seasonality
 

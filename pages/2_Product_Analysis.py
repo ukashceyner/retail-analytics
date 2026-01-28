@@ -74,36 +74,29 @@ if not df_category.empty:
     col1, col2 = st.columns(2)
 
     with col1:
-        # Combo chart: bars for revenue, line for profit
+        # Grouped bar chart - same scale for accurate comparison
         fig = go.Figure()
 
-        # Revenue bars
         fig.add_trace(go.Bar(
             x=df_category['category'],
             y=df_category['revenue'],
             name='Revenue',
-            marker_color='#3498db',
-            yaxis='y'
+            marker_color='#3498db'
         ))
 
-        # Profit line on secondary axis
-        fig.add_trace(go.Scatter(
+        fig.add_trace(go.Bar(
             x=df_category['category'],
             y=df_category['profit'],
             name='Profit',
-            mode='lines+markers',
-            marker=dict(size=10, color='#2ecc71'),
-            line=dict(width=3, color='#2ecc71'),
-            yaxis='y2'
+            marker_color='#2ecc71'
         ))
 
         fig.update_layout(
             title='Revenue & Profit by Category',
             xaxis_title='Category',
-            yaxis=dict(title='Revenue ($)', side='left'),
-            yaxis2=dict(title='Profit ($)', side='right', overlaying='y'),
-            legend=dict(orientation='h', yanchor='bottom', y=-0.25, xanchor='center', x=0.5),
-            hovermode='x unified'
+            yaxis_title='Amount ($)',
+            barmode='group',
+            legend=dict(orientation='h', yanchor='bottom', y=-0.25, xanchor='center', x=0.5)
         )
         st.plotly_chart(fig, use_container_width=True)
 

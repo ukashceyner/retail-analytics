@@ -102,7 +102,7 @@ if not df_category.empty:
             xaxis_title='Category',
             yaxis=dict(title='Revenue ($)', side='left'),
             yaxis2=dict(title='Profit ($)', side='right', overlaying='y'),
-            legend=dict(x=0.01, y=0.99),
+            legend=dict(orientation='h', yanchor='bottom', y=-0.25, xanchor='center', x=0.5),
             hovermode='x unified'
         )
         st.plotly_chart(fig, use_container_width=True)

@@ -80,15 +80,30 @@ if not df_yoy.empty:
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
-        fig = px.bar(
-            df_yoy,
-            x='year',
-            y='orders',
-            title='Order Volume by Year',
-            labels={'orders': 'Number of Orders'}
-        )
-        fig.update_traces(marker_color='#2ecc71')
-        st.plotly_chart(fig, use_container_width=True)
+        # Top Sub-Categories by Revenue
+        query_subcats = """
+        SELECT
+            sub_category,
+            SUM(sale_price) as revenue
+        FROM orders
+        GROUP BY sub_category
+        ORDER BY revenue DESC
+        LIMIT 10
+        """
+        df_subcats = run_query(query_subcats)
+
+        if not df_subcats.empty:
+            fig = px.bar(
+                df_subcats,
+                x='revenue',
+                y='sub_category',
+                orientation='h',
+                title='Top 10 Sub-Categories by Revenue',
+                labels={'revenue': 'Revenue ($)', 'sub_category': 'Sub-Category'}
+            )
+            fig.update_traces(marker_color='#2ecc71')
+            fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+            st.plotly_chart(fig, use_container_width=True)
 
 # Segment Analysis
 st.subheader("Customer Segment Analysis")
@@ -120,15 +135,37 @@ if not df_segment.empty:
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
-        fig = px.bar(
-            df_segment,
-            x='segment',
-            y='avg_margin',
-            title='Average Profit Margin by Segment',
-            labels={'avg_margin': 'Profit Margin (%)'}
-        )
-        fig.update_traces(marker_color='#9b59b6')
-        st.plotly_chart(fig, use_container_width=True)
+        # Discount Impact on Profit Margins
+        query_discount = """
+        SELECT
+            CASE
+                WHEN discount_percent = 0 THEN 'No Discount'
+                WHEN discount_percent <= 10 THEN '1-10%'
+                WHEN discount_percent <= 20 THEN '11-20%'
+                ELSE '>20%'
+            END as discount_tier,
+            COUNT(*) as orders,
+            ROUND(AVG(profit_margin)::numeric, 2) as avg_margin
+        FROM orders
+        GROUP BY discount_tier
+        ORDER BY avg_margin DESC
+        """
+        df_discount = run_query(query_discount)
+
+        if not df_discount.empty:
+            fig = px.bar(
+                df_discount,
+                x='discount_tier',
+                y='avg_margin',
+                title='Discount Impact on Profit Margin',
+                labels={'avg_margin': 'Profit Margin (%)', 'discount_tier': 'Discount Tier'},
+                color='avg_margin',
+                color_continuous_scale='RdYlGn'
+            )
+            fig.update_layout(
+                xaxis={'categoryorder': 'array', 'categoryarray': ['No Discount', '1-10%', '11-20%', '>20%']}
+            )
+            st.plotly_chart(fig, use_container_width=True)
 
     # Data table
     st.subheader("Segment Details")
